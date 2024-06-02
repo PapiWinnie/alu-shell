@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# This script lists the content of the current directory, displaying only the part of the name after the first dash.
-
-for file in *; do
-    if [ -d "$file" ]; then
-        echo ${file##*-}
-    fi
+# Script lists content in current directory without initial - in filenames
+file="$(ls)"
+for i in $file;
+do
+    echo "$i" | cut -d '-' -f2
 done
