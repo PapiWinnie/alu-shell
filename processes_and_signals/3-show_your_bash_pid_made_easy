@@ -6,10 +6,10 @@ process_list=$(</proc/*/cmdline)
 
 # Loop through each process and filter those containing the word "bash"
 while IFS= read -r line; do
-    if [[ $line == *bash* ]]; then
+    if [[ $line =~ .*bash.* ]]; then
         # Extract PID and process name
         pid=$(echo "$line" | awk -F'/' '{print $3}')
-        process_name=$(echo "$line" | awk -F'/' '{print $4}')
+        process_name=$(tr '\0' ' ' </proc/"$pid"/cmdline)
         echo "$pid $process_name"
     fi
 done <<< "$process_list"
