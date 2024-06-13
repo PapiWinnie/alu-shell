@@ -1,46 +1,7 @@
 #!/usr/bin/env bash
-# This script manages the manage_my_process program.
-
-# Function to write "I am alive!" and pause
-write_alive() {
-    while true; do
-        echo "I am alive!" >> /tmp/my_process
-        sleep 2
-    done
-}
-
-# Main script
-case "$1" in
-    start)
-        if [ -f "/var/run/my_process.pid" ]; then
-            echo "Error: manage_my_process is already running."
-            exit 1
-        fi
-        write_alive &
-        echo "$!" > /var/run/my_process.pid
-        echo "manage_my_process started"
-        ;;
-    stop)
-        if [ ! -f "/var/run/my_process.pid" ]; then
-            echo "Error: manage_my_process is not running."
-            exit 1
-        fi
-        kill "$(cat /var/run/my_process.pid)"
-        rm "/var/run/my_process.pid"
-        echo "manage_my_process stopped"
-        ;;
-    restart)
-        if [ -f "/var/run/my_process.pid" ]; then
-            kill "$(cat /var/run/my_process.pid)"
-            rm "/var/run/my_process.pid"
-        fi
-        write_alive &
-        echo "$!" > /var/run/my_process.pid
-        echo "manage_my_process restarted"
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
-
+#manage
+while [[ 1 -eq 1 ]]
+do
+echo "I am alive!" >> /tmp/my_process
+sleep 2 
+done
